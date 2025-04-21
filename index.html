@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form - Chesterfield Bariatric Surgery</title>
+    <title>Schedule Consultation - Chesterfield Bariatric Surgery</title>
     <style>
         body {
             font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -23,8 +23,8 @@
         }
         h1 {
             color: #ffffff;
-            text-align: center;
-            font-size: 1.875rem;
+            text-align: left;
+            font-size: 2.5rem;
             font-weight: 600;
             margin-bottom: 2rem;
         }
@@ -36,6 +36,7 @@
             margin-bottom: 0.5rem;
             color: #d1d5db; /* text-gray-300 */
             font-weight: 500;
+            font-size: 1.125rem;
         }
         input[type="text"],
         input[type="email"],
@@ -65,19 +66,39 @@
             resize: vertical;
         }
         button {
-            background-color: #3b82f6; /* blue-500 */
+            background-color: #9CA3AF;
             color: white;
             padding: 0.75rem 1.5rem;
             border: none;
-            border-radius: 0.375rem;
+            border-radius: 0.5rem;
             cursor: pointer;
             width: 100%;
-            font-size: 1rem;
+            font-size: 1.25rem;
             font-weight: 500;
             transition: background-color 0.2s;
         }
         button:hover {
-            background-color: #2563eb; /* blue-600 */
+            background-color: #6B7280;
+        }
+        button:disabled {
+            background-color: #9CA3AF;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .consent-group {
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .consent-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        input[type="checkbox"] {
+            width: 1.2rem;
+            height: 1.2rem;
+            cursor: pointer;
         }
         .success-message {
             display: none;
@@ -101,46 +122,63 @@
 </head>
 <body>
     <div class="container">
-        <h1>Contact Us</h1>
-        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <h1>Schedule Consultation</h1>
+        <form name="contact" method="POST" data-netlify="true">
             <input type="hidden" name="form-name" value="contact" />
-            <p class="hidden">
-                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-            </p>
             
             <div class="form-group">
-                <label for="name">Name:</label>
+                <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
             </div>
             
             <div class="form-group">
-                <label for="email">Email:</label>
+                <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
             </div>
             
             <div class="form-group">
-                <label for="phone">Phone:</label>
+                <label for="phone">Phone</label>
                 <input type="tel" id="phone" name="phone" required>
             </div>
             
             <div class="form-group">
-                <label for="service">Service Interested In:</label>
+                <label for="service">Service Interested In</label>
                 <select id="service" name="service" required>
                     <option value="">Select a service</option>
-                    <option value="gastric-sleeve">Gastric Sleeve</option>
-                    <option value="gastric-bypass">Gastric Bypass</option>
-                    <option value="revision-surgery">Revision Surgery</option>
-                    <option value="other">Other</option>
+                    <option value="gastric-sleeve">Gastric Sleeve Surgery</option>
+                    <option value="gastric-bypass">Gastric Bypass Surgery</option>
+                    <option value="revisional">Revisional Bariatric Surgery</option>
+                    <option value="gallbladder">Gallbladder Surgery</option>
+                    <option value="anti-reflux">Anti-Reflux Surgery</option>
+                    <option value="panniculectomy">Panniculectomy</option>
+                    <option value="cosmetic">Cosmetic Solutions</option>
                 </select>
             </div>
             
             <div class="form-group">
-                <label for="message">Message:</label>
+                <label for="message">Message</label>
                 <textarea id="message" name="message" required></textarea>
             </div>
+
+            <div class="consent-group">
+                <label>
+                    <input type="checkbox" id="consent" name="consent" required>
+                    I consent to receiving email and phone correspondence regarding my inquiry
+                </label>
+            </div>
             
-            <button type="submit">Submit</button>
+            <button type="submit" id="submitBtn" disabled>Submit</button>
         </form>
     </div>
+
+    <script>
+        // Enable/disable submit button based on consent checkbox
+        const consentCheckbox = document.getElementById('consent');
+        const submitButton = document.getElementById('submitBtn');
+
+        consentCheckbox.addEventListener('change', function() {
+            submitButton.disabled = !this.checked;
+        });
+    </script>
 </body>
 </html> 
