@@ -3,192 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schedule Consultation - Chesterfield Bariatric Surgery</title>
+    <title>Schedule a Consultation - Chesterfield Bariatric Surgery</title>
     <style>
         body {
-            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
             margin: 0;
             padding: 20px;
-            background-color: #ffffff;
-            color: #1e293b;
+            background-color: #f9fafb;
         }
-        .container {
+        .form-container {
             max-width: 600px;
             margin: 0 auto;
-            background: #ffffff;
+            background: white;
             padding: 2rem;
-            border-radius: 0.5rem;
-        }
-        h1 {
-            color: #1e293b;
-            text-align: left;
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         .form-group {
             margin-bottom: 1.5rem;
         }
         label {
             display: block;
-            margin-bottom: 0.75rem;
-            color: #1e293b;
+            margin-bottom: 0.5rem;
             font-weight: 500;
-            font-size: 1.125rem;
+            color: #1a1a1a;
         }
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        select,
-        textarea {
+        input, select, textarea {
             width: 100%;
             padding: 0.75rem;
-            background-color: #ffffff;
-            border: 1px solid #cbd5e1;
-            border-radius: 0.375rem;
-            color: #1e293b;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            background-color: white;
             font-size: 1rem;
-            transition: border-color 0.2s;
-        }
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="tel"]:focus,
-        select:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #94a3b8;
-            box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.1);
-        }
-        select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-            background-position: right 0.5rem center;
-            background-repeat: no-repeat;
-            background-size: 1.5em 1.5em;
-            padding-right: 2.5rem;
         }
         textarea {
             height: 120px;
             resize: vertical;
         }
         button {
-            background-color: #5eead4;
-            color: #1e293b;
+            background-color: #eab308;
+            color: white;
             padding: 0.75rem 1.5rem;
             border: none;
-            border-radius: 0.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
             cursor: pointer;
             width: 100%;
-            font-size: 1.25rem;
-            font-weight: 500;
             transition: background-color 0.2s;
         }
         button:hover {
-            background-color: #2dd4bf;
-        }
-        button:disabled {
-            background-color: #99f6e4;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-        .consent-group {
-            margin-top: 2rem;
-            margin-bottom: 1.5rem;
-        }
-        .consent-group label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            font-size: 1rem;
-            color: #475569;
-        }
-        input[type="checkbox"] {
-            width: 1.2rem;
-            height: 1.2rem;
-            cursor: pointer;
-            border: 1px solid #cbd5e1;
-            border-radius: 0.25rem;
+            background-color: #ca8a04;
         }
         .success-message {
             display: none;
-            padding: 1rem;
-            background-color: #10b981;
-            color: white;
-            border-radius: 0.375rem;
-            margin-top: 1rem;
-            text-align: center;
-        }
-        .error-message {
-            display: none;
-            padding: 1rem;
-            background-color: #ef4444;
-            color: white;
-            border-radius: 0.375rem;
+            color: #059669;
             margin-top: 1rem;
             text-align: center;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Schedule Consultation</h1>
-        <form name="contact" method="POST" data-netlify="true">
-            <input type="hidden" name="form-name" value="contact" />
-            
+    <div class="form-container">
+        <form name="consultation" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <p style="display: none">
+                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            </p>
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Full Name *</label>
                 <input type="text" id="name" name="name" required>
             </div>
-            
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">Email Address *</label>
                 <input type="email" id="email" name="email" required>
             </div>
-            
             <div class="form-group">
-                <label for="phone">Phone</label>
+                <label for="phone">Phone Number *</label>
                 <input type="tel" id="phone" name="phone" required>
             </div>
-            
             <div class="form-group">
-                <label for="service">Service Interested In</label>
+                <label for="service">Interested Service *</label>
                 <select id="service" name="service" required>
                     <option value="">Select a service</option>
-                    <option value="gastric-sleeve">Gastric Sleeve Surgery</option>
-                    <option value="gastric-bypass">Gastric Bypass Surgery</option>
-                    <option value="revisional">Revisional Bariatric Surgery</option>
-                    <option value="gallbladder">Gallbladder Surgery</option>
-                    <option value="anti-reflux">Anti-Reflux Surgery</option>
-                    <option value="panniculectomy">Panniculectomy</option>
-                    <option value="cosmetic">Cosmetic Solutions</option>
+                    <option value="Gastric Sleeve">Gastric Sleeve Surgery</option>
+                    <option value="Gastric Bypass">Gastric Bypass Surgery</option>
+                    <option value="Revisional Surgery">Revisional Bariatric Surgery</option>
+                    <option value="General Surgery">General Surgery</option>
+                    <option value="Other">Other</option>
                 </select>
             </div>
-            
             <div class="form-group">
                 <label for="message">Message</label>
-                <textarea id="message" name="message" required></textarea>
+                <textarea id="message" name="message"></textarea>
             </div>
-
-            <div class="consent-group">
-                <label>
-                    <input type="checkbox" id="consent" name="consent" required>
-                    I consent to receiving email and phone correspondence regarding my inquiry
-                </label>
-            </div>
-            
-            <button type="submit" id="submitBtn" disabled>Submit</button>
+            <button type="submit">Submit Consultation Request</button>
         </form>
+        <div class="success-message">
+            Thank you for your submission! We'll contact you shortly.
+        </div>
     </div>
-
     <script>
-        // Enable/disable submit button based on consent checkbox
-        const consentCheckbox = document.getElementById('consent');
-        const submitButton = document.getElementById('submitBtn');
-
-        consentCheckbox.addEventListener('change', function() {
-            submitButton.disabled = !this.checked;
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const successMessage = document.querySelector('.success-message');
+            const form = e.target;
+            
+            fetch('/', {
+                method: 'POST',
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(new FormData(form)).toString()
+            })
+            .then(() => {
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+            })
+            .catch((error) => alert('Error: ' + error));
         });
     </script>
 </body>
