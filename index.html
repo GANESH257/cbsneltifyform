@@ -66,8 +66,8 @@
 </head>
 <body>
     <div class="form-container">
-        <form name="consultation" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
-            <input type="hidden" name="redirect" value="https://cbsurgery.com/thank-you" />
+        <form id="consultationForm" name="consultation" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="redirect" value="https://cbsurgery.com/landingpage/thank-you/" />
             <p style="display: none">
                 <label>Don't fill this out if you're human: <input name="bot-field" /></label>
             </p>
@@ -99,7 +99,7 @@
                 <textarea id="message" name="message"></textarea>
             </div>
             <button type="submit">Schedule Consultation</button>
-            <div class="success-message" id="success-message">
+            <div class="success-message" id="successMessage">
                 Thank you for your submission! We will contact you shortly.
             </div>
         </form>
@@ -109,9 +109,6 @@
         // Function to handle form submission
         function handleSubmit(event) {
             event.preventDefault();
-            
-            // Show success message
-            document.getElementById('success-message').style.display = 'block';
             
             // Submit the form to Netlify
             const form = event.target;
@@ -123,7 +120,7 @@
             })
             .then(response => {
                 if (response.ok) {
-                    // Show success message
+                    // Show success message and hide form
                     document.getElementById('successMessage').style.display = 'block';
                     document.getElementById('consultationForm').style.display = 'none';
                     
