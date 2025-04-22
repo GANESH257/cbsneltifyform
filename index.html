@@ -132,18 +132,6 @@
                         console.log('Sending closeForm message to parent');
                         window.parent.postMessage('closeForm', '*');
                     }, 2000);
-                    
-                    // Redirect parent window after 5 seconds
-                    setTimeout(() => {
-                        console.log('Attempting to redirect to thank-you page');
-                        try {
-                            window.top.location.href = 'https://cbsurgery.com/landingpage/thank-you/';
-                        } catch (error) {
-                            console.error('Redirection error:', error);
-                            // Fallback to parent window if top window access is blocked
-                            window.parent.location.href = 'https://cbsurgery.com/landingpage/thank-you/';
-                        }
-                    }, 5000);
                 }
             })
             .catch(error => {
