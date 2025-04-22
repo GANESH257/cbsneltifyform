@@ -66,7 +66,8 @@
 </head>
 <body>
     <div class="form-container">
-        <form name="consultation" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <form name="consultation" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
+            <input type="hidden" name="redirect" value="https://cbsurgery.com/thank-you" />
             <p style="display: none">
                 <label>Don't fill this out if you're human: <input name="bot-field" /></label>
             </p>
@@ -97,28 +98,11 @@
                 <label for="message">Message</label>
                 <textarea id="message" name="message"></textarea>
             </div>
-            <button type="submit">Submit Consultation Request</button>
+            <button type="submit">Schedule Consultation</button>
+            <div class="success-message" id="success-message">
+                Thank you for your submission! We will contact you shortly.
+            </div>
         </form>
-        <div class="success-message">
-            Thank you for your submission! We'll contact you shortly.
-        </div>
     </div>
-    <script>
-        document.querySelector('form').addEventListener('submit', function(e) {
-            const successMessage = document.querySelector('.success-message');
-            const form = e.target;
-            
-            fetch('/', {
-                method: 'POST',
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(new FormData(form)).toString()
-            })
-            .then(() => {
-                form.style.display = 'none';
-                successMessage.style.display = 'block';
-            })
-            .catch((error) => alert('Error: ' + error));
-        });
-    </script>
 </body>
 </html> 
