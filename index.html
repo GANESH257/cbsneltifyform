@@ -123,14 +123,18 @@
             })
             .then(response => {
                 if (response.ok) {
+                    // Show success message
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('consultationForm').style.display = 'none';
+                    
                     // Close the popup after 2 seconds
                     setTimeout(() => {
                         window.parent.postMessage('closeForm', '*');
                     }, 2000);
                     
-                    // Redirect after 5 seconds
+                    // Redirect parent window after 5 seconds
                     setTimeout(() => {
-                        window.location.href = 'https://cbsurgery.com/landingpage/thank-you/';
+                        window.parent.location.href = 'https://cbsurgery.com/landingpage/thank-you/';
                     }, 5000);
                 }
             })
