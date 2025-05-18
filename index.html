@@ -115,29 +115,29 @@
             const form = event.target;
             const formData = new FormData(form);
             
-            // First submit to Netlify
-            fetch('/', {
+            // Submit to Google Sheets first
+            const formDataObj = {};
+            formData.forEach((value, key) => {
+                formDataObj[key] = value;
+            });
+            
+            // Submit to Google Sheets
+            fetch('/.netlify/functions/submit-to-sheets', {
                 method: 'POST',
-                body: formData,
+                body: JSON.stringify(formDataObj),
             })
             .then(response => {
-                console.log('Form submission response:', response);
                 if (response.ok) {
-                    // Also submit to Google Sheets
-                    const formDataObj = {};
-                    formData.forEach((value, key) => {
-                        formDataObj[key] = value;
-                    });
-                    
-                    return fetch('/.netlify/functions/submit-to-sheets', {
+                    // After Google Sheets submission, submit to Netlify
+                    return fetch('/', {
                         method: 'POST',
-                        body: JSON.stringify(formDataObj),
+                        body: formData,
                     });
                 }
             })
             .then(response => {
                 if (response && response.ok) {
-                    console.log('Form submitted successfully to both Netlify and Google Sheets');
+                    console.log('Form submitted successfully');
                     // Show success message and hide form
                     document.getElementById('successMessage').style.display = 'block';
                     document.getElementById('consultationForm').style.display = 'none';
